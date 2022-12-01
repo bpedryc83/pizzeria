@@ -79,6 +79,7 @@
       thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
       thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
       thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
+      thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
     }
     initAccordion(){
       const thisProduct = this;
@@ -116,7 +117,7 @@
     
       // covert form to object structure e.g. { sauce: ['tomato'], toppings: ['olives', 'redPeppers']}
       const formData = utils.serializeFormToObject(thisProduct.form);
-    
+
       // set price to default price
       let price = thisProduct.data.price;
       
@@ -129,9 +130,21 @@
         for(let optionId in param.options) {
           // determine option value, e.g. optionId = 'olives', option = { label: 'Olives', price: 2, default: true }
           const option = param.options[optionId];
+          
+          const imageForOption = thisProduct.imageWrapper.querySelector('.' + paramId + '-' + optionId);
+          if(imageForOption){
+            if(formData[paramId] && formData[paramId].includes(optionId)) {
+              imageForOption.classList.add(classNames.menuProduct.imageVisible);
+            }
+            else{
+              imageForOption.classList.remove(classNames.menuProduct.imageVisible);
+            }
+          }
 
           // check if there is param with a name of paramId in formData and if it includes optionId
           if(formData[paramId] && formData[paramId].includes(optionId)) {
+            
+
             // check if the option is not default
             if(!option['default']) {
               // add option price to price variable
