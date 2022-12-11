@@ -203,11 +203,11 @@
     }
   ],
   "orders": {
-    "address": "Rzeszow",
-    "phone": "Phone",
-    "totalPrice": 69,
-    "subtotalPrice": 49,
-    "totalNumber": 3,
+    "address": "",
+    "phone": "",
+    "totalPrice": 29,
+    "subtotalPrice": 9,
+    "totalNumber": 1,
     "deliveryFee": 20,
     "products": [
       {
@@ -217,37 +217,6 @@
         "priceSingle": 9,
         "price": 9,
         "params": {}
-      },
-      {
-        "id": "pizza",
-        "name": "Nonna Alba's Pizza",
-        "amount": 2,
-        "priceSingle": 20,
-        "price": 40,
-        "params": {
-          "sauce": {
-            "label": "Sauce",
-            "options": {
-              "tomato": "Tomato"
-            }
-          },
-          "toppings": {
-            "label": "Toppings",
-            "options": {
-              "olives": "Olives",
-              "redPeppers": "Red peppers",
-              "greenPeppers": "Green peppers",
-              "mushrooms": "Mushrooms",
-              "basil": "Fresh basil"
-            }
-          },
-          "crust": {
-            "label": "pizza crust",
-            "options": {
-              "standard": "standard"
-            }
-          }
-        }
       }
     ]
   }
