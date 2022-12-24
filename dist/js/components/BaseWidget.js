@@ -20,7 +20,7 @@ class BaseWidget{
     const thisWidget = this;
     
     const newValue = thisWidget.parseValue(value);
-    console.log('newValue: ' + newValue);
+    //console.log('newValue: ' + newValue);
 
     if(thisWidget.correctValue != newValue && thisWidget.isValid(newValue)){
       thisWidget.correctValue = newValue;
