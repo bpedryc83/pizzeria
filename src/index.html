@@ -7,7 +7,8 @@
   <title>Pizzeria</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <link href="https://fonts.googleapis.com/css?family=Lato:400,300i,700%7COswald:300,500,700&amp;subset=latin-ext" rel="stylesheet">
-  <link href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" rel="stylesheet">
+  <link href="https://use.fontawesome.com/releases/v6.2.0/css/all.css" rel="stylesheet">
+  <link rel="stylesheet" href="vendor/flickity.min.css" media="screen">  
   <link rel="stylesheet" href="vendor/range-slider.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -21,6 +22,7 @@
           <h2 class="logo__subtitle">the best homemade Italian food</h2>
         </div>
         <div class="main-nav">
+          <a href="#home">Home</a>
           <a href="#order">Order</a>
           <a href="#booking">Booking</a>
         </div>
@@ -62,6 +64,141 @@
   </header>
 
   <div id="pages">
+    <section id="home">
+      <div class="container">
+        <div class="container homepage">
+          <div class="row first">
+            <div class="tile picture pizza-1">
+              <a href="#order">
+                ORDER ONLINE</br>
+                <div class="extra-text">Delicious food delivered to your door</div>
+              </a>
+            </div>
+            <div class="tile picture pizza-2">
+              <a href="#booking">
+                BOOK A TABLE<br>
+                <div class="extra-text">Be sure that your table is waiting for you</div>
+              </a>
+            </div>
+          </div>
+          <div class="row">
+            <div class="tile openinghours-tile-home">
+              <div>OPENING HOURS:<br>
+                <span class="small-text-tile">TUE-SUN, 12PM - 12AM</span>
+              </div>
+            </div>
+          </div>
+          <div class="carousel">
+            <div class="main-carousel" data-flickity='{ "cellAlign": "left", "contain": true, "autoPlay": true, "prevNextButtons": false }'>
+              <div class="carousel-cell flex-elements">
+                <div class="image-in-carousel">
+                  <img src="/images/assets/pizza-3.jpg">
+                </div>
+                <div class="text-in-carousel">
+                  <div class="bold">AMAZING SERVICE</div>
+                    Non facilis omnis qui magni deleniti id amet provident aut temporibus nihil et consectetur quia aut repellendus quas. Eum dolorem nobis eos voluptas nisi est velit temporibus.<br><br>
+                    - Margaret Osborne
+                </div>
+              </div>
+              <div class="carousel-cell flex-elements">
+                <div class="image-in-carousel">
+                  <img src="/images/assets/pizza-3.jpg">
+                </div>
+                <div class="text-in-carousel">
+                  <div class="bold">GOOD SNACKS</div>
+                    Eos voluptas eveniet ut libero quas ea voluptas voluptate vel molestias sequi in ipsa suscipit id consequatur unde.<br><br>
+                    - Kaslik Amanow
+                </div>
+              </div>
+              <div class="carousel-cell flex-elements">
+                <div class="image-in-carousel">
+                  <img src="/images/assets/pizza-3.jpg">
+                </div>
+                <div class="text-in-carousel">
+                  <div class="bold">GREAT VENUE</div>
+                    Lorem ipsum dolor sit amet. Non minima ipsum et modi sunt rem rerum nihil qui doloremque autem rem quae exercitationem ex voluptatibus ipsam. <br><br>
+                    - Rupert Sasanov
+                </div>
+              </div>
+            </div>
+          </div>
+      
+          <div class="first gallery-row">
+            <div class="picture gallery-picture-home">
+              <div class="picture-z-index">
+                <img src="/images/assets/pizza-4.jpg">
+              </div>
+              <div class="opacity-object-z-index">                
+              </div>
+              <div class="icons-z-index">
+                <i class="fa-solid fa-heart style-hover"></i>
+                <i class="fa-solid fa-share-nodes style-hover"></i>
+              </div>
+            </div>
+            <div class="picture gallery-picture-home">
+              <div class="picture-z-index">
+                <img src="/images/assets/pizza-5.jpg">
+              </div>
+              <div class="opacity-object-z-index">                
+              </div>
+              <div class="icons-z-index">
+                <i class="fa-solid fa-heart style-hover"></i>
+                <i class="fa-solid fa-share-nodes style-hover"></i>
+              </div>
+            </div>
+            <div class="picture gallery-picture-home">
+              <div class="picture-z-index">
+                <img src="/images/assets/pizza-6.jpg">
+              </div>
+              <div class="opacity-object-z-index">                
+              </div>
+              <div class="icons-z-index">
+                <i class="fa-solid fa-heart style-hover"></i>
+                <i class="fa-solid fa-share-nodes style-hover"></i>
+              </div>
+            </div>
+          </div>
+          <div class="gallery-row">
+            <div class="picture gallery-picture-home">
+              <div class="picture-z-index">
+                <img src="/images/assets/pizza-7.jpg">
+              </div>
+              <div class="opacity-object-z-index">                
+              </div>
+              <div class="icons-z-index">
+                <i class="fa-solid fa-heart style-hover"></i>
+                <i class="fa-solid fa-share-nodes style-hover"></i>
+              </div>
+            </div>
+            <div class="picture gallery-picture-home">
+              <div class="picture-z-index">
+                <img src="/images/assets/pizza-8.jpg">
+              </div>
+              <div class="opacity-object-z-index">                
+              </div>
+              <div class="icons-z-index">
+                <i class="fa-solid fa-heart style-hover"></i>
+                <i class="fa-solid fa-share-nodes style-hover"></i>
+              </div>
+            </div>
+            <div class="picture gallery-picture-home">
+              <div class="picture-z-index">
+                <img src="/images/assets/pizza-9.jpg">
+              </div>
+              <div class="opacity-object-z-index">                
+              </div>
+              <div class="icons-z-index">
+                <i class="fa-solid fa-heart style-hover"></i>
+                <i class="fa-solid fa-share-nodes style-hover"></i>
+              </div>
+            </div>
+          </div>
+          <div class="footer">
+            <a href="#">View more on instagram</a>
+          </div>
+        </div>
+      </div>
+    </section>
     <section id="order">
       <div id="product-list" class="product-list container"></div>
     </section>
@@ -70,6 +207,7 @@
     </section>
   </div>
 
+  
   <script id="template-cart-product" type="text/x-handlebars-template">
     <li>
       <div class="widget-amount"> <!-- widget-amount -->
@@ -246,6 +384,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <script src="vendor/range-slider.js" type="module"></script>
+  <script src="vendor/flickity.pkgd.min.js"></script>
   <script src="js/app.js" type="module"></script>
 </body>
 </html>

@@ -173,6 +173,8 @@ class Booking{
   sendBooking(){
     const thisBooking = this;
 
+    console.log('Przed const payLoad oraz wywołaniem makeBooked: ', JSON.parse(JSON.stringify(thisBooking.booked)));
+
     const payload = {
       date: thisBooking.date,
       hour: utils.numberToHour(thisBooking.hour),
@@ -192,6 +194,8 @@ class Booking{
 
     thisBooking.makeBooked(payload.date, payload.hour, payload.duration, payload.table);
     
+    console.log('Po const payLoad oraz wywołaniu makeBooked: ', thisBooking.booked);
+
     const justReservedTableDOM = document.querySelector(select.booking.tables + '[' + settings.booking.tableIdAttribute + '="' + thisBooking.reservedTable + '"]');
     justReservedTableDOM.classList.add(classNames.booking.tableBooked);
 
