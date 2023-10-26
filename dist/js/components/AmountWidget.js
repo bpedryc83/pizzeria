@@ -2,9 +2,11 @@ import {settings, select} from '../settings.js';
 import BaseWidget from './BaseWidget.js';
 
 class AmountWidget extends BaseWidget{
-  constructor(element){
+  constructor(element, currentValue = false){
     super(element, settings.amountWidget.defaultValue);
     const thisWidget = this;
+    thisWidget.currentValue = currentValue;
+    thisWidget.initialValue = true;
     
     thisWidget.getElements(element);
     thisWidget.renderValue();
@@ -26,8 +28,15 @@ class AmountWidget extends BaseWidget{
 
   renderValue(){
     const thisWidget = this;
+    if (thisWidget.currentValue && thisWidget.initialValue) {
+      thisWidget.dom.input.value = thisWidget.currentValue;
+      thisWidget.initialValue = false;
+      thisWidget.value = thisWidget.currentValue;
+    }
+    else {
+      thisWidget.dom.input.value = thisWidget.value;
+    }
 
-    thisWidget.dom.input.value = thisWidget.value;
   }
 
   initActions(){

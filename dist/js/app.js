@@ -27,13 +27,9 @@ export const app = {
         const clickedElement = this;
         event.preventDefault();
 
-        /* get page ID from href attribute */
         const id = clickedElement.getAttribute('href').replace('#', '');
-
-        /* run thisApp.activatePage with that ID */
         thisApp.activatePage(id);
 
-        /* change URL hash */
         window.location.hash = '#/' + id;
       });
     }
@@ -41,11 +37,9 @@ export const app = {
   activatePage: function(pageId){
     const thisApp = this;
 
-    /* add class 'active' to matching pages, remove from non-matching */
     for (let page of thisApp.pages){
       page.classList.toggle(classNames.pages.active, page.id == pageId);
     }
-    /* add class 'active' to matching links, remove from non-matching */
     for (let link of thisApp.navLinks){
       link.classList.toggle(
         classNames.nav.active,
@@ -71,11 +65,7 @@ export const app = {
         return rawResponse.json();
       })
       .then(function(parsedResponse){
-
-        /*save parsedResponse as thisApp.data.products */
         thisApp.data.products = parsedResponse;
-
-        /*execute initMenu method*/
         thisApp.initMenu();
       });
   },
