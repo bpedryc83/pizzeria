@@ -31,6 +31,12 @@ class Cart{
     thisCart.dom.toggleTrigger.addEventListener('click', function(){
       thisCart.dom.wrapper.classList.toggle(classNames.cart.wrapperActive);
     });
+    document.addEventListener('click', function (event) {
+      const isClickInsideCart = thisCart.dom.wrapper.contains(event.target);
+      if (!isClickInsideCart) {
+        thisCart.dom.wrapper.classList.remove(classNames.cart.wrapperActive);
+      }
+    });
     thisCart.dom.productList.addEventListener('updated', function(){
       thisCart.update();
     });
