@@ -101,7 +101,7 @@
   width: 320px;
   height: 320px;
   border: 12px solid $color-dark;
-  margin: ($base-size * 4) auto;
+  margin: ($base-size * 4) auto 18px auto;
   background: linear-gradient(to right, #e9dfc4 0%, #e9dfc4 1%, #ede3c8 2%, #ede3c8 24%, #ebddc3 25%, #e9dfc4 48%, #ebddc3 49%, #e6d8bd 52%, #e6d8bd 53%, #e9dbc0 54%, #e6d8bd 55%, #e6d8bd 56%, #e9dbc0 57%, #e6d8bd 58%, #e6d8bd 73%, #e9dbc0 74%, #e9dbc0 98%, #ebddc3 100%);
   background-size: ($base-size * 3);
   background-repeat: repeat;
@@ -210,4 +210,48 @@
 .booking-options {
   @include flex(row, flex-start, space-between);
   margin: ($base-size * 4) auto;
+}
+
+.justify-center {
+  text-align: center;
+}
+
+.false-validation {
+  margin-top: 25px;
+  color: red;
+  background-color: yellow;
+  text-align: center;
+}
+
+.booking-summary {
+  text-align: center;
+}
+
+.table-legend {
+  text-align: center;
+  span {
+    display: inline-block;
+  }
+  span:last-child {
+    margin-left: 3px;
+    margin-right: 8px;
+  }
+}
+
+.legend-square {
+  min-width: 26px;
+  border: 1px solid black;
+}
+
+.legend-square.available {
+  background: #f7f1e3;
+}
+
+.legend-square.user-reservation {
+  background: $color-success;
+  opacity: 0.4;
+}
+
+.legend-square.not-available {
+  background: lighten($color-dark, 40%);
 }

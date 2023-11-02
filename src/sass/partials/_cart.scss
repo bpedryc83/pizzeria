@@ -148,6 +148,7 @@
   &__order-confirmation {
     border-top: 1px solid lighten($color-dark, 70%);
     padding: $base-size 0 0 0;
+    text-align: center;
 
     input, button {
       width: 100%;

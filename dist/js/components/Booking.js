@@ -122,22 +122,47 @@ class Booking{
 
     thisBooking.dom.bookTableButton.addEventListener('click', function(event){
       event.preventDefault();
-      thisBooking.sendBooking();
-      /*let isFormValid = true;
-      if (!thisBooking.dom.inputPhone.checkValidity() || !thisBooking.dom.inputAddress.checkValidity()){
-        isFormValid = false;
-      }
-      
-      if (isFormValid == true){
-        event.preventDefault();
+      let validation = false;
 
-        if (thisBooking.reservedTable == null){
-          alert('Proszę wybrać stolik!');
+      const phoneValue = thisBooking.dom.inputPhone.value;
+      const isValidPhone = /^\d{3,9}$/.test(phoneValue);
+      const eMailValue = thisBooking.dom.inputAddress.value;
+      const isValidEMail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(eMailValue);
+      const tables = thisBooking.dom.tables;
+      let isTableReserved = false;
+      const falseValidationHTML = thisBooking.dom.falseValidation;
+      
+      for (let i = 0 ; i < tables.length ; i++) {
+        if (tables[i].classList.contains('reserved')) {
+          isTableReserved = true;
         }
-        else {
-          thisBooking.sendBooking();
-        }
-      }*/
+      }
+
+      if (!isTableReserved) {
+        falseValidationHTML.innerHTML = 'Please choose the table';
+      }
+      else if (!phoneValue || !isValidPhone) {
+        falseValidationHTML.innerHTML = 'Please provide correct phone number (only sign "+", minimum 3 and maximum 9 digits)';
+      }
+      else if (!eMailValue || !isValidEMail) {
+        falseValidationHTML.innerHTML = 'Please provide e-mail address correctly';
+      }
+      else {
+        falseValidationHTML.innerHTML = '';
+        validation = true;
+      }
+
+      if (validation) {
+        thisBooking.sendBooking();
+        const confirmationMessage = 'Reservation confirmed for table no. ' + thisBooking.reservedTable +
+        ' for ' + thisBooking.dom.inputPeopleAmount.value + ' people' +
+        ' on ' + thisBooking.date + ', ' + utils.numberToHour(thisBooking.hour) +
+        ' for ' + thisBooking.dom.inputDuration.value + ' hour(s). ' +
+        'Saved contact data: phone ' + phoneValue + 
+        ', e-mail address ' + eMailValue + '.';
+
+        console.log(confirmationMessage);
+      }
     });
 
     thisBooking.dom.floorPlan.addEventListener('click', function(event){
@@ -164,7 +189,7 @@ class Booking{
         }
       }
       else if (clickedTableDOM.classList.contains(classNames.booking.table) && clickedTableDOM.classList.contains(classNames.booking.tableBooked)){
-        alert('Stolik niedostępny');
+        alert('This table is not available');
       }
     });
   
@@ -197,6 +222,7 @@ class Booking{
     console.log('Po const payLoad oraz wywołaniu makeBooked: ', thisBooking.booked);
 
     const justReservedTableDOM = document.querySelector(select.booking.tables + '[' + settings.booking.tableIdAttribute + '="' + thisBooking.reservedTable + '"]');
+    console.log('justReservedTableDom: ', justReservedTableDOM);
     justReservedTableDOM.classList.add(classNames.booking.tableBooked);
 
     const url = settings.db.url + '/' + settings.db.booking;
@@ -281,6 +307,8 @@ class Booking{
     thisBooking.dom.inputPhone = document.querySelector(select.booking.inputPhone);
     thisBooking.dom.inputAddress = document.querySelector(select.booking.inputAddress);
     thisBooking.dom.starters = document.querySelectorAll(select.booking.starters);
+
+    thisBooking.dom.falseValidation = document.querySelector(select.booking.falseValidation);
   }
 
   initWidgets(){

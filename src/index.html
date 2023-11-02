@@ -52,8 +52,8 @@
                 </li>
               </ul>
               <div class="cart__order-confirmation">
-                <input type="tel" name="phone" placeholder="Your phone" autocomplete="off" required>
-                <input type="text" name="address" placeholder="Your address" autocomplete="off" required>
+                <input type="tel" name="phone" placeholder="Your phone" autocomplete="off" pattern="[0-9+]{3,10}" title="Please enter only digits and plus sign. Min-max length: 3-10 characters." required>
+                <input type="text" name="address" placeholder="Your address" autocomplete="off" pattern="[0-9a-zA-Z\/\- ]*" title="Please enter only digits, letters, /, -" required>
                 <button type="submit" class="btn-secondary">Order</button>
               </div>
             </form>
@@ -335,6 +335,20 @@
           <div class="object table table--round" data-table="2">table-2</div>
           <div class="object table" data-table="3">table-3</div>
         </div>
+        <div class="table-legend">
+          <span class="legend-element">
+            <span class="legend-square available">&nbsp;</span>
+            <span> - available</span>
+          </span>
+          <span class="legend-element">
+            <span class="legend-square not-available">&nbsp;</span>
+            <span> - not available</span>
+          </span>
+          <span class="legend-element">
+            <span class="legend-square user-reservation">&nbsp;</span>
+            <span> - your reservation</span>
+          </span>
+        </div>
         <div class="booking-options"> <!-- options -->
           <label class="booking-option-title"> <!-- option-row -->
             People
@@ -370,12 +384,14 @@
             </div>
           </div>
         </div>
-        <div class="order-confirmation">
-          <input type="tel" name="phone" placeholder="Your phone" autocomplete="off" required>
-          <input type="text" name="address" placeholder="Your address" autocomplete="off" required>
+        <div class="booking__order-confirmation justify-center">
+          <input type="tel" name="phone" placeholder="Your phone" autocomplete="off" pattern="[0-9+]{3,10}" title="Please enter only digits and plus sign. Min-max length: 3-10 characters." required>
+          <input type="text" name="address" placeholder="Your address" autocomplete="off" pattern="[0-9a-zA-Z\/\- ]*" title="Please enter only digits, letters, /, -" required>
           <button type="submit" class="btn-secondary">Book table</button>
         </div>
       </form>
+      <div class="false-validation"></div>
+      <div class="booking-summary"></div>
     </div>
   </script>
 

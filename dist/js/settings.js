@@ -40,19 +40,22 @@ export const select = {
     },
   },
   buttons: {
-    bookTable: '.order-confirmation .btn-secondary',
+    bookTable: '.booking__order-confirmation .btn-secondary',
   },
 
   booking: {
+    date: '.time-picker [name="date"]',
+    time: 'time-picker [name="hour"]',
     peopleAmount: '.people-amount',
     hoursAmount: '.hours-amount',
     tables: '.floor-plan .table',
     floorPlan: '.floor-plan',
     inputPeopleAmount: '[name="people"]',
     inputDuration: '[name="hours"]',
-    inputAddress: '.order-confirmation [name="address"]',
-    inputPhone: '.order-confirmation [name="phone"]',
+    inputAddress: '.booking__order-confirmation [name="address"]',
+    inputPhone: '.booking__order-confirmation [name="phone"]',
     starters: '.checkbox [name="starter"]',
+    falseValidation: '.false-validation',
   },
   nav: {
     links: '.main-nav a',
