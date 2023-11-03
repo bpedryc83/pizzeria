@@ -4,6 +4,7 @@ export const select = {
     cartProduct: '#template-cart-product',
     bookingWidget: '#template-booking-widget',
     bookingSummary: '#template-booking-summary',
+    orderSummary: '#template-order-summary',
   },
   containerOf: {
     menu: '#product-list',
@@ -55,7 +56,7 @@ export const select = {
     floorPlan: '.floor-plan',
     inputPeopleAmount: '[name="people"]',
     inputDuration: '[name="hours"]',
-    inputAddress: '.booking__order-confirmation [name="address"]',
+    inputEMail: '.booking__order-confirmation [name="email"]',
     inputPhone: '.booking__order-confirmation [name="phone"]',
     starters: '.checkbox [name="starter"]',
     falseValidation: '.false-validation',
@@ -78,6 +79,10 @@ export const select = {
     formSubmit: '.cart__order [type="submit"]',
     phone: '[name="phone"]',
     address: '[name="address"]',
+    buttonOrder: '#button-order',
+    orderSummary: '#order-summary',
+    orderDetails: '#order-details',
+    
   },
   cartProduct: {
     amountWidget: '.widget-amount',
@@ -138,7 +143,7 @@ export const settings = {
     repeatParam: 'repeat_ne=false',
   },
   cart: {
-    defaultDeliveryFee: 20,
+    defaultDeliveryFee: 5,
   },
 };
 
@@ -147,4 +152,5 @@ export const templates = {
   cartProduct: Handlebars.compile(document.querySelector(select.templateOf.cartProduct).innerHTML),
   bookingWidget: Handlebars.compile(document.querySelector(select.templateOf.bookingWidget).innerHTML),
   bookingSummary: Handlebars.compile(document.querySelector(select.templateOf.bookingSummary).innerHTML),
+  orderSummary: Handlebars.compile(document.querySelector(select.templateOf.orderSummary).innerHTML),
 };

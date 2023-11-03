@@ -54,7 +54,7 @@
               <div class="cart__order-confirmation">
                 <input type="tel" name="phone" placeholder="Your phone" autocomplete="off" pattern="[0-9+]{3,10}" title="Please enter only digits and plus sign. Min-max length: 3-10 characters." required>
                 <input type="text" name="address" placeholder="Your address" autocomplete="off" pattern="[0-9a-zA-Z\/\- ]*" title="Please enter only digits, letters, /, -" required>
-                <button type="submit" class="btn-secondary">Order</button>
+                <button id="button-order" type="submit" class="btn-secondary not-clickable">Order</button>
               </div>
             </form>
           </div>
@@ -199,12 +199,14 @@
       </div>
     </section>
     <section id="order">
-      <div id="product-list" class="product-list container"></div>
+      <div id="product-list" class="product-list container active"></div>
+      <div id="order-summary" class="order-summary container"></div>
     </section>
     <section id="booking">
       <div class="booking-wrapper container"></div>
     </section>
   </div>
+
   <script id="template-cart-product" type="text/x-handlebars-template">
     <li>
       <div class="widget-amount">
@@ -234,82 +236,114 @@
   </script>
 
   <script id="template-menu-product" type="text/x-handlebars-template">
-    <article class="product">
-
-        <header class="product__header">
-          <h3 class="product__name no-spacing">{{ name }} <i class="fas fa-chevron-down product__icon"></i></h3>
-          <p class="product__base-price no-spacing">${{ price }}</p>
-        </header>
-        <div class="product__description">
-          <p>{{{ description }}}</p>
-        </div>
-        <div class="product__wrapper">
-          <form class="product__order">
-            <ul class="product__params">
-              {{#each params as |param paramId| }}
-              {{#ifEquals type "checkboxes"}}
-              <li>
-                <h3 class="product__params-title">{{{ label }}}</h3>
-                {{#each options}}
-                <div class="checkbox"> 
-                  <label>
-                    <input type="checkbox" name="{{ paramId }}" value="{{ @key }}" id="{{ @key }}" {{#if default}}checked{{/if}}>
-                    <span class="checkbox__checkmark"></span>
-                    {{{ label }}} (${{{ price }}})
-                  </label>
-                </div>
-                {{/each}}
-              </li>
-              {{/ifEquals}}
-              {{#ifEquals type "radios"}}
-              <li>
-                <h3 class="product__params-title">{{{ label }}}</h3>
-                {{#each options}}
-                <div class="checkbox checkbox--round">
-                  <label>
-                    {{{ label }}} (${{{ price }}})
-                    <input type="radio" name="{{ paramId }}" value="{{ @key }}" id="{{ @key }}" {{#if default}}checked{{/if}}>
-                    <span class="checkbox__checkmark"></span>
-                  </label>
-                </div>
-                {{/each}}
-              </li>
-              {{/ifEquals}}
-              {{#ifEquals type "select"}}
-              <li>
-                <h3 class="product__params-title">{{{ label }}}</h3>
-                <select name="{{ paramId }}">
-                  {{#each options}}
-                  <option value="{{ @key }}" {{#if default}}selected{{/if}}>{{{ label }}} (${{{ price }}})</option>
-                  {{/each}}
-                </select>
-              </li>
-              {{/ifEquals}}
+    <div class="product">
+      <header class="product__header">
+        <h3 class="product__name no-spacing">{{ name }} <i class="fas fa-chevron-down product__icon"></i></h3>
+        <p class="product__base-price no-spacing">${{ price }}</p>
+      </header>
+      <div class="product__description">
+        <p>{{{ description }}}</p>
+      </div>
+      <div class="product__wrapper">
+        <form class="product__order">
+          <ul class="product__params">
+            {{#each params as |param paramId| }}
+            {{#ifEquals type "checkboxes"}}
+            <li>
+              <h3 class="product__params-title">{{{ label }}}</h3>
+              {{#each options}}
+              <div class="checkbox"> 
+                <label>
+                  <input type="checkbox" name="{{ paramId }}" value="{{ @key }}" id="{{ @key }}" {{#if default}}checked{{/if}}>
+                  <span class="checkbox__checkmark"></span>
+                  {{{ label }}} (${{{ price }}})
+                </label>
+              </div>
               {{/each}}
-            </ul>
-            <div class="amount">
-              <div class="widget-amount">
-                <h3 class="product__params-title">Select quantity</h3>
-                <a class="btn-quantity" href="#less"><i class="fas fa-minus"></i></a>
-                <input class="amount" type="text">
-                <a class="btn-quantity" href="#more"><i class="fas fa-plus"></i></a>
+            </li>
+            {{/ifEquals}}
+            {{#ifEquals type "radios"}}
+            <li>
+              <h3 class="product__params-title">{{{ label }}}</h3>
+              {{#each options}}
+              <div class="checkbox checkbox--round">
+                <label>
+                  {{{ label }}} (${{{ price }}})
+                  <input type="radio" name="{{ paramId }}" value="{{ @key }}" id="{{ @key }}" {{#if default}}checked{{/if}}>
+                  <span class="checkbox__checkmark"></span>
+                </label>
               </div>
-              <p class="product__total-price">
-                Total: $<span class="price">{{{ price }}}</span>
-              </p>
-              <div>
-                <a class="btn-primary" href="#add-to-cart">Add to cart</a>
-              </div>
-            </div>
-          </form>
-          <div class="product__images {{ class }}">
-            {{#each images}}
-            {{{ this }}}
+              {{/each}}
+            </li>
+            {{/ifEquals}}
+            {{#ifEquals type "select"}}
+            <li>
+              <h3 class="product__params-title">{{{ label }}}</h3>
+              <select name="{{ paramId }}">
+                {{#each options}}
+                <option value="{{ @key }}" {{#if default}}selected{{/if}}>{{{ label }}} (${{{ price }}})</option>
+                {{/each}}
+              </select>
+            </li>
+            {{/ifEquals}}
             {{/each}}
+          </ul>
+          <div class="amount">
+            <div class="widget-amount">
+              <h3 class="product__params-title">Select quantity</h3>
+              <a class="btn-quantity" href="#less"><i class="fas fa-minus"></i></a>
+              <input class="amount" type="text">
+              <a class="btn-quantity" href="#more"><i class="fas fa-plus"></i></a>
+            </div>
+            <p class="product__total-price">
+              Total: $<span class="price">{{{ price }}}</span>
+            </p>
+            <div>
+              <a class="btn-primary" href="#add-to-cart">Add to cart</a>
+            </div>
           </div>
+        </form>
+        <div class="product__images {{ class }}">
+          {{#each images}}
+          {{{ this }}}
+          {{/each}}
         </div>
+      </div>
+    </div>
+  </script>
 
-    </article>
+  <script id="template-order-summary" type="text/x-handlebars-template">
+    <h2 class="info__title no-spacing">Order confirmation</h2>
+    <div id="order-details" class="order-details">
+      <div class="confirmation-header">Order confirmed!</div>
+      <div class="table-order-details">
+        <div class="table-order-header">Order details </div>
+        <div class="table-order-first-row">
+          <span class="table-order-col1">No.</span>
+          <span class="table-order-col2">Product's name</span>
+          <span class="table-order-col3">Amount</span>
+          <span class="table-order-col4">Price</span>
+          <span class="table-order-col5">Total</span>
+        </div>        
+        {{#each products}}
+        <div class="table-order-row">
+          <span class="table-order-col1">{{this.index}}</span>
+          <span class="table-order-col2">{{this.name}}</span>
+          <span class="table-order-col3">{{this.amount}}</span>
+          <span class="table-order-col4">${{this.priceSingle}}</span>
+          <span class="table-order-col5">${{this.price}}</span>
+        </div>
+        {{/each}}
+      </div>
+      <div class="table-order-total-price">Total price: ${{totalPrice}}</div>
+      <div class="table-order-delivery-data">
+        <div class="table-order-delivery-header">Delivery data:</div>
+        <div class="table-order-delivery-address">Address: {{ address }}</div>
+        <div class="table-order-delivery-phone">Phone: {{ phone }}</div>
+      </div>
+      <div class="table-order-thanks">Thank you for your order. We guarantee delivery time up to 45 minutes.</div>
+    </div>
+    <button id="new-order" class="btn-primary new-order">New order</button>
   </script>
 
   <script id="template-booking-widget" type="text/x-handlebars-template">
@@ -384,8 +418,8 @@
           </div>
         </div>
         <div class="booking__order-confirmation justify-center">
-          <input type="tel" name="phone" placeholder="Your phone" autocomplete="off" pattern="[0-9+]{3,10}" title="Please enter only digits and plus sign. Min-max length: 3-10 characters." required>
-          <input type="text" name="address" placeholder="Your address" autocomplete="off" pattern="[0-9a-zA-Z\/\- ]*" title="Please enter only digits, letters, /, -" required>
+          <input type="tel" name="phone" placeholder="Your phone" autocomplete="off">
+          <input type="text" name="email" placeholder="Your e-mail" autocomplete="off">
           <button type="submit" class="btn-secondary">Book table</button>
         </div>
       </form>

@@ -16,6 +16,9 @@ class Cart{
 
     thisCart.dom = {};
     thisCart.dom.wrapper = element;
+
+    thisCart.dom.menu = document.querySelector(select.containerOf.menu);
+
     thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(select.cart.toggleTrigger);
     thisCart.dom.productList = document.querySelector(select.cart.productList);
     thisCart.dom.deliveryFee = document.querySelector(select.cart.deliveryFee);
@@ -25,24 +28,44 @@ class Cart{
     thisCart.dom.form = document.querySelector(select.cart.form);
     thisCart.dom.address = document.querySelector(select.cart.address);
     thisCart.dom.phone = document.querySelector(select.cart.phone);
+    thisCart.dom.buttonOrder = document.querySelector(select.cart.buttonOrder);
+    thisCart.dom.orderSummary = document.querySelector(select.cart.orderSummary);
+
+    console.log(thisCart.dom);
   }
   initActions(){
     const thisCart = this;
+    let domCartTrashElements;
     thisCart.dom.toggleTrigger.addEventListener('click', function(){
       thisCart.dom.wrapper.classList.toggle(classNames.cart.wrapperActive);
+      if (thisCart.dom.wrapper.classList.contains('active')) {
+        domCartTrashElements = thisCart.dom.wrapper.querySelectorAll('.fa-trash-alt');
+      }
+    });
+    thisCart.dom.productList.addEventListener('remove', function(event){
+      thisCart.remove(event.detail.cartProduct);
     });
     document.addEventListener('click', function (event) {
       const isClickInsideCart = thisCart.dom.wrapper.contains(event.target);
-      if (!isClickInsideCart) {
+      let trashWasClicked = false;
+
+      if (domCartTrashElements) {
+        for (let i = 0 ; i < domCartTrashElements.length ; i++) {
+          if (domCartTrashElements[i].contains(event.target)){
+            trashWasClicked = true;
+            break;
+          }
+        }
+      }
+
+      if (!isClickInsideCart && !trashWasClicked) {
         thisCart.dom.wrapper.classList.remove(classNames.cart.wrapperActive);
       }
     });
     thisCart.dom.productList.addEventListener('updated', function(){
       thisCart.update();
     });
-    thisCart.dom.productList.addEventListener('remove', function(event){
-      thisCart.remove(event.detail.cartProduct);
-    });
+
     thisCart.dom.form.addEventListener('submit', function(event){
       event.preventDefault();
       thisCart.sendOrder();
@@ -57,6 +80,10 @@ class Cart{
 
     thisCart.products.push(new CartProduct(menuProduct, generatedDOM));
     thisCart.update();
+
+    if (thisCart.dom.buttonOrder.classList.contains('not-clickable')) {
+      thisCart.dom.buttonOrder.classList.remove('not-clickable');
+    }
   }
   update(){
     const thisCart = this;
@@ -92,6 +119,10 @@ class Cart{
     const indexOfRemovedObject = thisCart.products.indexOf(object);
     thisCart.products.splice(indexOfRemovedObject, 1);
     thisCart.update();
+
+    if (thisCart.products.length === 0 && !thisCart.dom.buttonOrder.classList.contains('not-clickable')) {
+      thisCart.dom.buttonOrder.classList.add('not-clickable');
+    }
   }
   sendOrder(){
     const thisCart = this;
@@ -107,11 +138,11 @@ class Cart{
       products: [],
     };
 
-    console.log('sendOrder: ', payload.address);
-
     for(let prod of thisCart.products) {
       payload.products.push(prod.getData());
     }
+
+    console.log('product example: ', payload.products[0]);
 
     const options = {
       method: 'POST',
@@ -124,9 +155,20 @@ class Cart{
     fetch(url, options)
       .then(function(response){
         return response.json();
-      }).then(function(parsedResponse){
+      })
+      .then(function(parsedResponse){
         console.log('parsedResponse', parsedResponse);
       });
+    
+    for (let i = 0; i < payload.products.length; i++) {
+      payload.products[i].index = i + 1;
+    }
+    
+    thisCart.dom.wrapper.classList.remove(classNames.cart.wrapperActive);
+    thisCart.dom.menu.classList.remove('active');
+    thisCart.dom.orderSummary.classList.add('active');
+    const generatedHTML = templates.orderSummary(payload);
+    thisCart.dom.orderSummary.innerHTML = generatedHTML;
   }
 }
 

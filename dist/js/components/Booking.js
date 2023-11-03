@@ -126,7 +126,7 @@ class Booking{
 
       const phoneValue = thisBooking.dom.inputPhone.value;
       const isValidPhone = /^\d{3,9}$/.test(phoneValue);
-      const eMailValue = thisBooking.dom.inputAddress.value;
+      const eMailValue = thisBooking.dom.inputEMail.value;
       const isValidEMail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(eMailValue);
       const tables = thisBooking.dom.tables;
       let isTableReserved = false;
@@ -188,7 +188,7 @@ class Booking{
           thisBooking.dom.bookingSummary.classList.add('not-visible');
           thisBooking.initWidgets();
           thisBooking.dom.inputPhone.value = '';
-          thisBooking.dom.inputAddress.value = '';
+          thisBooking.dom.inputEMail.value = '';
           for (let i = 0 ; i < starters.length ; i++) {
             starters.splice(i, 1);
           }
@@ -248,7 +248,7 @@ class Booking{
       ppl: parseInt(thisBooking.dom.inputPeopleAmount.value),
       starters: [],
       phone: thisBooking.dom.inputPhone.value,
-      address: thisBooking.dom.inputAddress.value,
+      email: thisBooking.dom.inputEMail.value,
     };
 
     for (let starter of thisBooking.dom.starters){
@@ -350,7 +350,7 @@ class Booking{
     thisBooking.dom.inputPeopleAmount = document.querySelector(select.booking.inputPeopleAmount);
     thisBooking.dom.inputDuration = document.querySelector(select.booking.inputDuration);
     thisBooking.dom.inputPhone = document.querySelector(select.booking.inputPhone);
-    thisBooking.dom.inputAddress = document.querySelector(select.booking.inputAddress);
+    thisBooking.dom.inputEMail = document.querySelector(select.booking.inputEMail);
     thisBooking.dom.starters = document.querySelectorAll(select.booking.starters);
 
     thisBooking.dom.falseValidation = document.querySelector(select.booking.falseValidation);

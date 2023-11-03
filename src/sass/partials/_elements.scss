@@ -9,6 +9,13 @@
   cursor: pointer;
 }
 
+.btn-secondary.not-clickable {
+  cursor: not-allowed;
+  background-color: lighten($color: $color-main, $amount: 0.3);
+  font-style: italic;
+  opacity: 50%; 
+}
+
 .btn-quantity {
   @include btn($color-dark, $color-light, $color-dark);
   vertical-align: top;
