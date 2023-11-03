@@ -41,6 +41,12 @@
   text-align: center;
 }
 
+.info__title {
+  @extend .h1;
+  margin: 0 0 ($base-size * 3) 0;
+  text-align: center;
+}
+
 .time-picker {
   @include flex(row, flex-start, space-between);
   margin: 0 0 ($base-size * 4) 0;
@@ -218,7 +224,7 @@
 
 .false-validation {
   margin-top: 25px;
-  color: red;
+  color: black;
   background-color: yellow;
   text-align: center;
 }
@@ -254,4 +260,37 @@
 
 .legend-square.not-available {
   background: lighten($color-dark, 40%);
+}
+
+.not-visible {
+  display: none;
+}
+
+.booking-summary {
+  text-align: center;
+}
+
+.booking-details {
+  width: 500px;
+  margin: auto auto;
+  padding: 5px 0;
+  color: $color-dark;
+  border: 2px solid $color-dark;
+  background: $color-success;
+  border-radius: 5px;
+}
+
+.confirmation-header {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.invitation {
+  margin-top: 10px;
+}
+
+.new-booking {
+  margin-top: 25px;
+  cursor: pointer;
 }

@@ -154,14 +154,57 @@ class Booking{
 
       if (validation) {
         thisBooking.sendBooking();
-        const confirmationMessage = 'Reservation confirmed for table no. ' + thisBooking.reservedTable +
-        ' for ' + thisBooking.dom.inputPeopleAmount.value + ' people' +
-        ' on ' + thisBooking.date + ', ' + utils.numberToHour(thisBooking.hour) +
-        ' for ' + thisBooking.dom.inputDuration.value + ' hour(s). ' +
-        'Saved contact data: phone ' + phoneValue + 
-        ', e-mail address ' + eMailValue + '.';
+        thisBooking.dom.bookingWidget.classList.add('not-visible');
+        thisBooking.dom.bookingSummary.classList.remove('not-visible');
+        const starters = [];
 
-        console.log(confirmationMessage);
+        for (let starter of thisBooking.dom.starters){
+          if (starter.checked == true){
+            starters.push(starter.value);
+          }
+        }
+
+        if (starters.length === 0) {
+          starters.push('none');
+        }
+        
+        const bookingData = {
+          date: thisBooking.date,
+          startHour: utils.numberToHour(thisBooking.hour),
+          finishHour: utils.numberToHour(thisBooking.hour + parseInt(thisBooking.dom.inputDuration.value)),
+          table: thisBooking.reservedTable,
+          peopleAmount: thisBooking.dom.inputPeopleAmount.value,
+          starters: starters,
+          phone: phoneValue,
+          eMail: eMailValue,
+        };
+
+        const generatedHTML = templates.bookingSummary(bookingData);
+        thisBooking.dom.bookingDetails.innerHTML = generatedHTML;
+
+        thisBooking.dom.newBookingButton.addEventListener('click', function(event){
+          event.preventDefault();
+          thisBooking.dom.bookingWidget.classList.remove('not-visible');
+          thisBooking.dom.bookingSummary.classList.add('not-visible');
+          thisBooking.initWidgets();
+          thisBooking.dom.inputPhone.value = '';
+          thisBooking.dom.inputAddress.value = '';
+          for (let i = 0 ; i < starters.length ; i++) {
+            starters.splice(i, 1);
+          }
+          for (let starter of thisBooking.dom.starters){
+            if (starter.checked == true){
+              starter.checked = false;
+            }
+          }
+          thisBooking.dom.time.value = 12;
+          const domRangeSliderFill = document.querySelector('.rangeSlider__fill__horizontal');
+          const domRangeSliderHandle = document.querySelector('.rangeSlider__handle__horizontal');
+
+          domRangeSliderFill.style.width = '12px';
+          domRangeSliderHandle.style.transform = 'translateX(0px)';
+          document.querySelector('.output').innerHTML = '12:00';
+        });
       }
     });
 
@@ -187,9 +230,6 @@ class Booking{
           incorrectReservedTableDOM.classList.remove(classNames.booking.reserved);
           thisBooking.reservedTable = currentClickedTable;          
         }
-      }
-      else if (clickedTableDOM.classList.contains(classNames.booking.table) && clickedTableDOM.classList.contains(classNames.booking.tableBooked)){
-        alert('This table is not available');
       }
     });
   
@@ -222,7 +262,6 @@ class Booking{
     console.log('Po const payLoad oraz wywołaniu makeBooked: ', thisBooking.booked);
 
     const justReservedTableDOM = document.querySelector(select.booking.tables + '[' + settings.booking.tableIdAttribute + '="' + thisBooking.reservedTable + '"]');
-    console.log('justReservedTableDom: ', justReservedTableDOM);
     justReservedTableDOM.classList.add(classNames.booking.tableBooked);
 
     const url = settings.db.url + '/' + settings.db.booking;
@@ -292,10 +331,16 @@ class Booking{
     thisBooking.dom.wrapper = element;
     thisBooking.dom.wrapper.innerHTML = generatedHTML;
 
+    thisBooking.dom.bookingWidget = document.querySelector(select.booking.bookingWidget);
+    thisBooking.dom.bookingSummary = document.querySelector(select.booking.bookingSummary);
+    thisBooking.dom.bookingDetails = document.querySelector(select.booking.bookingDetails);
+    thisBooking.dom.newBookingButton = document.querySelector(select.booking.newBookingButton);
+
     thisBooking.dom.peopleAmount = document.querySelector(select.booking.peopleAmount);
     thisBooking.dom.hoursAmount = document.querySelector(select.booking.hoursAmount);
     thisBooking.dom.datePicker = document.querySelector(select.widgets.amount.datePicker.wrapper);
     thisBooking.dom.hourPicker = document.querySelector(select.widgets.amount.hourPicker.wrapper);
+    thisBooking.dom.time = document.querySelector(select.booking.time);
 
     thisBooking.dom.tables = document.querySelectorAll(select.booking.tables);
     thisBooking.dom.floorPlan = document.querySelector(select.booking.floorPlan);

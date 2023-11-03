@@ -1,8 +1,9 @@
 export const select = {
   templateOf: {
     menuProduct: '#template-menu-product',
-    cartProduct: '#template-cart-product', // CODE ADDED
+    cartProduct: '#template-cart-product',
     bookingWidget: '#template-booking-widget',
+    bookingSummary: '#template-booking-summary',
   },
   containerOf: {
     menu: '#product-list',
@@ -25,7 +26,7 @@ export const select = {
   },
   widgets: {
     amount: {
-      input: 'input.amount', // CODE CHANGED
+      input: 'input.amount',
       linkDecrease: 'a[href="#less"]',
       linkIncrease: 'a[href="#more"]',
       datePicker: {
@@ -44,8 +45,10 @@ export const select = {
   },
 
   booking: {
+    bookingWidget: '.booking-widget',
     date: '.time-picker [name="date"]',
-    time: 'time-picker [name="hour"]',
+    time: '#input-time',
+    //time: 'time-picker [name="hour"]',
     peopleAmount: '.people-amount',
     hoursAmount: '.hours-amount',
     tables: '.floor-plan .table',
@@ -56,12 +59,14 @@ export const select = {
     inputPhone: '.booking__order-confirmation [name="phone"]',
     starters: '.checkbox [name="starter"]',
     falseValidation: '.false-validation',
+    bookingSummary: '#booking-summary',
+    bookingDetails: '#booking-details',
+    newBookingButton: '#new-booking',
   },
   nav: {
     links: '.main-nav a',
     linksFromTiles: '.tile a',
   },
-  // CODE ADDED START
   cart: {
     productList: '.cart__order-summary',
     toggleTrigger: '.cart__summary',
@@ -80,7 +85,6 @@ export const select = {
     edit: '[href="#edit"]',
     remove: '[href="#remove"]',
   },
-  // CODE ADDED END
 };
 
 export const classNames = {
@@ -88,7 +92,6 @@ export const classNames = {
     wrapperActive: 'active',
     imageVisible: 'active',
   },
-  // CODE ADDED START
   cart: {
     wrapperActive: 'active',
   },
@@ -104,7 +107,6 @@ export const classNames = {
   pages: {
     active: 'active',
   }
-  // CODE ADDED END
 };
 
 export const settings = {
@@ -135,15 +137,14 @@ export const settings = {
     notRepeatParam: 'repeat=false',
     repeatParam: 'repeat_ne=false',
   },
-  // CODE ADDED START
   cart: {
     defaultDeliveryFee: 20,
   },
-  // CODE ADDED END
 };
 
 export const templates = {
   menuProduct: Handlebars.compile(document.querySelector(select.templateOf.menuProduct).innerHTML),
   cartProduct: Handlebars.compile(document.querySelector(select.templateOf.cartProduct).innerHTML),
   bookingWidget: Handlebars.compile(document.querySelector(select.templateOf.bookingWidget).innerHTML),
+  bookingSummary: Handlebars.compile(document.querySelector(select.templateOf.bookingSummary).innerHTML),
 };

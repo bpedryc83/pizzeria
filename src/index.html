@@ -228,7 +228,6 @@
       </div>
       <ul class="cart__action-buttons no-spacing">
         <li><a href="#edit"></a></li>
-        <!-- <li><a href="#edit">Edit<i class="fas fa-pencil-alt"></i></a></li> -->
         <li><a href="#remove">Remove<i class="fas fa-trash-alt"></i></a></li>
       </ul>
     </li>
@@ -263,10 +262,10 @@
               </li>
               {{/ifEquals}}
               {{#ifEquals type "radios"}}
-              <li> <!-- radios -->
+              <li>
                 <h3 class="product__params-title">{{{ label }}}</h3>
                 {{#each options}}
-                <div class="checkbox checkbox--round"> <!-- radio -->
+                <div class="checkbox checkbox--round">
                   <label>
                     {{{ label }}} (${{{ price }}})
                     <input type="radio" name="{{ paramId }}" value="{{ @key }}" id="{{ @key }}" {{#if default}}checked{{/if}}>
@@ -277,7 +276,7 @@
               </li>
               {{/ifEquals}}
               {{#ifEquals type "select"}}
-              <li> <!-- select -->
+              <li>
                 <h3 class="product__params-title">{{{ label }}}</h3>
                 <select name="{{ paramId }}">
                   {{#each options}}
@@ -288,8 +287,8 @@
               {{/ifEquals}}
               {{/each}}
             </ul>
-            <div class="amount"> <!-- controls -->
-              <div class="widget-amount"> <!-- widget-amount -->
+            <div class="amount">
+              <div class="widget-amount">
                 <h3 class="product__params-title">Select quantity</h3>
                 <a class="btn-quantity" href="#less"><i class="fas fa-minus"></i></a>
                 <input class="amount" type="text">
@@ -303,7 +302,7 @@
               </div>
             </div>
           </form>
-          <div class="product__images {{ class }}"> <!-- images -->
+          <div class="product__images {{ class }}">
             {{#each images}}
             {{{ this }}}
             {{/each}}
@@ -323,9 +322,9 @@
             <input type="text" name="date">
           </div>
           <div class="hour-picker range-slider">
-              <div class="output"></div>
-              <label class="booking-option-title">Pick a time</label>
-            <input type="range" name="hour" value="12" min="12" max="24" step="0.5">
+            <div class="output"></div>
+            <label class="booking-option-title">Pick a time</label>
+            <input id="input-time" type="range" name="hour" value="12" min="12" max="24" step="0.5">
           </div>
         </div>
         <div class="floor-plan">
@@ -349,24 +348,24 @@
             <span> - your reservation</span>
           </span>
         </div>
-        <div class="booking-options"> <!-- options -->
-          <label class="booking-option-title"> <!-- option-row -->
+        <div class="booking-options">
+          <label class="booking-option-title">
             People
-            <div class="widget-amount people-amount"> <!-- widget-amount -->
+            <div class="widget-amount people-amount">
               <a class="btn-quantity" href="#less"><i class="fas fa-minus"></i></a>
               <input class="amount" type="text" name="people" value="1">
               <a class="btn-quantity" href="#more"><i class="fas fa-plus"></i></a>
             </div>
           </label>
-          <label class="booking-option-title"> <!-- option-row -->
+          <label class="booking-option-title">
             Hours
-            <div class="widget-amount hours-amount"> <!-- widget-amount -->
+            <div class="widget-amount hours-amount">
               <a class="btn-quantity" href="#less"><i class="fas fa-minus"></i></a>
               <input class="amount" type="text" name="hours" value="1">
               <a class="btn-quantity" href="#more"><i class="fas fa-plus"></i></a>
             </div>
           </label>
-          <div> <!-- option-row -->
+          <div>
             <span class="booking-option-title">Starters</span>
             <div class="checkbox">
               <label>
@@ -391,8 +390,25 @@
         </div>
       </form>
       <div class="false-validation"></div>
-      <div class="booking-summary"></div>
     </div>
+    <div id="booking-summary" class="booking-summary not-visible">
+      <h2 class="info__title no-spacing">Booking confirmation</h2>
+      <div id="booking-details" class="booking-details"></div>
+      <button id="new-booking" class="btn-primary new-booking">New booking</button>
+    </div>
+  </script>
+
+  <script id="template-booking-summary" type="text/x-handlebars-template">
+    <div class="confirmation-header">Reservation confirmed!</div>
+    <div>{{ date }}, {{ startHour }} - {{ finishHour }}</div>
+    <div>Table no. {{ table }} for {{ peopleAmount }} people</div>
+    <div>Starters: 
+      {{#each starters}}
+      <span>{{this}}{{#unless @last}}, {{/unless}}</span>
+      {{/each}}
+    </div>
+    <div>Phone: {{ phone }}, email: {{ eMail }}</div>
+    <div class="invitation">Thank you for your reservation. See you soon in our restaurant!</div>
   </script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.min.js"></script>
