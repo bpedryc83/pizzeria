@@ -203,19 +203,19 @@
     }
   ],
   "orders": {
-    "address": "Rzeszow",
-    "phone": "43256",
-    "totalPrice": 101,
-    "subtotalPrice": 96,
-    "totalNumber": 7,
+    "address": "fsdbjfla",
+    "phone": "4573287",
+    "totalPrice": 23,
+    "subtotalPrice": 18,
+    "totalNumber": 2,
     "deliveryFee": 5,
     "products": [
       {
         "id": "cake",
         "name": "Zio Stefano's Doughnut",
-        "amount": 3,
+        "amount": 1,
         "priceSingle": 9,
-        "price": 27,
+        "price": 9,
         "params": {}
       },
       {
@@ -229,37 +229,6 @@
             "label": "Coffee type",
             "options": {
               "latte": "Latte"
-            }
-          }
-        }
-      },
-      {
-        "id": "pizza",
-        "name": "Nonna Alba's Pizza",
-        "amount": 3,
-        "priceSingle": 20,
-        "price": 60,
-        "params": {
-          "sauce": {
-            "label": "Sauce",
-            "options": {
-              "tomato": "Tomato"
-            }
-          },
-          "toppings": {
-            "label": "Toppings",
-            "options": {
-              "olives": "Olives",
-              "redPeppers": "Red peppers",
-              "greenPeppers": "Green peppers",
-              "mushrooms": "Mushrooms",
-              "basil": "Fresh basil"
-            }
-          },
-          "crust": {
-            "label": "pizza crust",
-            "options": {
-              "standard": "standard"
             }
           }
         }

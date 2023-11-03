@@ -783,7 +783,7 @@ input.error, select.error {
   margin-top: 10px;
 }
 
-.new-order {
+.new-order-button {
   margin-top: 25px;
   cursor: pointer;
 }

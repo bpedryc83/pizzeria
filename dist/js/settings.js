@@ -82,7 +82,7 @@ export const select = {
     buttonOrder: '#button-order',
     orderSummary: '#order-summary',
     orderDetails: '#order-details',
-    
+    newOrderButton: '#new-order-button',
   },
   cartProduct: {
     amountWidget: '.widget-amount',

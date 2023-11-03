@@ -18,6 +18,7 @@ class Cart{
     thisCart.dom.wrapper = element;
 
     thisCart.dom.menu = document.querySelector(select.containerOf.menu);
+    thisCart.dom.productList = document.querySelector(select.cart.productList);
 
     thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(select.cart.toggleTrigger);
     thisCart.dom.productList = document.querySelector(select.cart.productList);
@@ -30,8 +31,6 @@ class Cart{
     thisCart.dom.phone = document.querySelector(select.cart.phone);
     thisCart.dom.buttonOrder = document.querySelector(select.cart.buttonOrder);
     thisCart.dom.orderSummary = document.querySelector(select.cart.orderSummary);
-
-    console.log(thisCart.dom);
   }
   initActions(){
     const thisCart = this;
@@ -142,8 +141,6 @@ class Cart{
       payload.products.push(prod.getData());
     }
 
-    console.log('product example: ', payload.products[0]);
-
     const options = {
       method: 'POST',
       headers: {
@@ -160,6 +157,9 @@ class Cart{
         console.log('parsedResponse', parsedResponse);
       });
     
+    const deliveryObject = {name: 'Delivery', amount: 1, priceSingle: thisCart.deliveryFee, price: thisCart.deliveryFee};
+    payload.products.push(deliveryObject);
+
     for (let i = 0; i < payload.products.length; i++) {
       payload.products[i].index = i + 1;
     }
@@ -169,6 +169,26 @@ class Cart{
     thisCart.dom.orderSummary.classList.add('active');
     const generatedHTML = templates.orderSummary(payload);
     thisCart.dom.orderSummary.innerHTML = generatedHTML;
+
+    thisCart.dom.address.value = '';
+    thisCart.dom.phone.value = '';
+    thisCart.dom.productList.innerHTML = '';
+
+    thisCart.products = [];
+    thisCart.update();
+
+    thisCart.dom.buttonOrder.classList.add('not-clickable');
+    thisCart.dom.newOrderButton = document.querySelector(select.cart.newOrderButton);
+
+    thisCart.dom.newOrderButton.addEventListener('click', function(event){
+      event.preventDefault();
+      thisCart.dom.menu.classList.add('active');
+      thisCart.dom.orderSummary.classList.remove('active');
+      const productsDivs = document.querySelectorAll('.product');
+      for (let i = 0 ; i < productsDivs.length ; i++) {
+        productsDivs[i].classList.remove('active');
+      }
+    });
   }
 }
 
