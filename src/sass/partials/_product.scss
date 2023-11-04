@@ -171,6 +171,7 @@
   width: 420px;
   text-align: center;
   margin: 17px auto;
+  border: 1px solid $color-dark;
 }
 
 .table-order-header {
@@ -191,6 +192,42 @@
   justify-content: center;
 }
 
+.table-order-product-name {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+}
+
+.table-order-details-ul {
+  list-style: none;
+  padding-inline-start: 5px;
+  padding: 0;
+  margin: 3px 0 0 0;
+  text-align: center;
+  width: 85%;
+  li {
+    display: block;
+    margin: 0 0 ($base-size / 4) 0;
+    font-size: 10px;
+    color: lighten($color-dark, 22%);
+    text-transform: lowercase;
+    font-style: italic;
+    line-height: 1.3;
+    letter-spacing: 0.5px;
+
+    .table-order-details-label {
+      position: relative;
+      padding: 0 ($base-size / 2) 0 0;
+      font-weight: bold;
+  
+      &::after {
+        position: absolute;
+        content: ':';
+      }      
+    }
+  }
+}
+
 .table-order-col1 {
   display: flex;
   width: 10%;
@@ -200,6 +237,7 @@
 
 .table-order-col2 {
   display: flex;
+  flex-wrap: wrap;
   width: 47%;
   border: 1px solid black;
   justify-content: center;

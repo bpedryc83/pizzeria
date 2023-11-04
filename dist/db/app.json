@@ -203,13 +203,62 @@
     }
   ],
   "orders": {
-    "address": "fsdbjfla",
-    "phone": "4573287",
-    "totalPrice": 23,
-    "subtotalPrice": 18,
-    "totalNumber": 2,
+    "address": "fdshgkafh",
+    "phone": "321465",
+    "totalPrice": 43,
+    "subtotalPrice": 38,
+    "totalNumber": 3,
     "deliveryFee": 5,
     "products": [
+      {
+        "id": "pizza",
+        "name": "Nonna Alba's Pizza",
+        "amount": 1,
+        "priceSingle": 20,
+        "price": 20,
+        "params": {
+          "sauce": {
+            "label": "Sauce",
+            "options": {
+              "tomato": "Tomato"
+            }
+          },
+          "toppings": {
+            "label": "Toppings",
+            "options": {
+              "olives": "Olives",
+              "redPeppers": "Red peppers",
+              "greenPeppers": "Green peppers",
+              "mushrooms": "Mushrooms",
+              "basil": "Fresh basil"
+            }
+          },
+          "crust": {
+            "label": "pizza crust",
+            "options": {
+              "standard": "standard"
+            }
+          }
+        }
+      },
+      {
+        "id": "salad",
+        "name": "Nonno Alberto's Salad",
+        "amount": 1,
+        "priceSingle": 9,
+        "price": 9,
+        "params": {
+          "ingredients": {
+            "label": "Ingredients",
+            "options": {
+              "cucumber": "Cucumber",
+              "tomatoes": "Tomatoes",
+              "olives": "Olives",
+              "herbs": "Fresh herbs"
+            }
+          }
+        }
+      },
       {
         "id": "cake",
         "name": "Zio Stefano's Doughnut",
@@ -217,21 +266,6 @@
         "priceSingle": 9,
         "price": 9,
         "params": {}
-      },
-      {
-        "id": "breakfast",
-        "name": "Zia Giulia's Breakfast",
-        "amount": 1,
-        "priceSingle": 9,
-        "price": 9,
-        "params": {
-          "coffee": {
-            "label": "Coffee type",
-            "options": {
-              "latte": "Latte"
-            }
-          }
-        }
       }
     ]
   },

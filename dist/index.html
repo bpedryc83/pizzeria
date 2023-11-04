@@ -53,7 +53,7 @@
               </ul>
               <div class="cart__order-confirmation">
                 <input type="tel" name="phone" placeholder="Your phone" autocomplete="off" pattern="[0-9+]{3,10}" title="Please enter only digits and plus sign. Min-max length: 3-10 characters." required>
-                <input type="text" name="address" placeholder="Your address" autocomplete="off" pattern="[0-9a-zA-Z\/\- ]*" title="Please enter only digits, letters, /, -" required>
+                <input type="text" name="address" placeholder="Your address" autocomplete="off" pattern="[0-9a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ\/\- ]*" title="Please enter only digits, letters, /, -" required>
                 <button id="button-order" type="submit" class="btn-secondary not-clickable">Order</button>
               </div>
             </form>
@@ -328,7 +328,17 @@
         {{#each products}}
         <div class="table-order-row">
           <span class="table-order-col1">{{this.index}}</span>
-          <span class="table-order-col2">{{this.name}}</span>
+          <span class="table-order-col2">
+            <span class="table-order-product-name">{{this.name}}</span>
+            <ul class="table-order-details-ul">
+              {{#each params}}
+                <li>
+                  <span class="table-order-details-label">{{ label }}</span>
+                  <span>{{#joinValues options}}, {{/joinValues}}</span>
+                </li>
+              {{/each}}
+            </ul>
+          </span>
           <span class="table-order-col3">{{this.amount}}</span>
           <span class="table-order-col4">${{this.priceSingle}}</span>
           <span class="table-order-col5">${{this.price}}</span>
