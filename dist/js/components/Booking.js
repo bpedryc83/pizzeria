@@ -140,16 +140,21 @@ class Booking{
 
       if (!isTableReserved) {
         falseValidationHTML.innerHTML = 'Please choose the table';
+        setTimeout(function() {
+          falseValidationHTML.innerHTML = ''; 
+        }, 3000);
       }
       else if (!phoneValue || !isValidPhone) {
         falseValidationHTML.innerHTML = 'Please provide correct phone number (only sign "+", minimum 3 and maximum 9 digits)';
+        setTimeout(function() {
+          falseValidationHTML.innerHTML = ''; 
+        }, 5000);
       }
       else if (!eMailValue || !isValidEMail) {
         falseValidationHTML.innerHTML = 'Please provide e-mail address correctly';
-      }
-      else {
-        falseValidationHTML.innerHTML = '';
-        validation = true;
+        setTimeout(function() {
+          falseValidationHTML.innerHTML = ''; 
+        }, 5000);
       }
 
       if (validation) {
@@ -216,23 +221,52 @@ class Booking{
       if (clickedTableDOM.classList.contains(classNames.booking.table) && !clickedTableDOM.classList.contains(classNames.booking.tableBooked)){
         currentClickedTable = clickedTableDOM.getAttribute(settings.booking.tableIdAttribute);
 
-        if (thisBooking.reservedTable == null){
-          clickedTableDOM.classList.add(classNames.booking.reserved);
-          thisBooking.reservedTable = currentClickedTable;
-        }
-        else if (thisBooking.reservedTable == currentClickedTable){
+        if (thisBooking.reservedTable == currentClickedTable){
           clickedTableDOM.classList.remove(classNames.booking.reserved);
           thisBooking.reservedTable = null;          
         }
-        else if (thisBooking.reservedTable != currentClickedTable && thisBooking.reservedTable != null){
-          clickedTableDOM.classList.add(classNames.booking.reserved);
-          const incorrectReservedTableDOM = document.querySelector('[' + settings.booking.tableIdAttribute + '="' + thisBooking.reservedTable + '"]');
-          incorrectReservedTableDOM.classList.remove(classNames.booking.reserved);
-          thisBooking.reservedTable = currentClickedTable;          
+        else {
+          let reservationIsPossible = true;
+          const reservationDate = thisBooking.date;
+          const reservationTime = thisBooking.hour;
+          const durationOfReservation = parseInt(thisBooking.dom.inputDuration.value);
+          const upperAlertHTML = document.querySelector(select.booking.upperAlert);
+          upperAlertHTML.innerHTML = '';
+          
+          // console.log ('reservationDate: ' + typeof(reservationDate) + ' ' + reservationDate);
+          // console.log('reservation: ' + typeof(reservationTime) + ' ' + reservationTime);
+          // console.log('duration :' + ' ' + typeof(durationOfReservation) + ' ' + durationOfReservation);
+
+          //console.log('bookedData: ', thisBooking.booked['2023-11-05'][12].includes(3));
+
+          for (let i = reservationTime ; i < reservationTime + durationOfReservation ; i += 0.5) {
+            if (thisBooking.booked[reservationDate][i] && thisBooking.booked[reservationDate][i].includes(parseInt(currentClickedTable))) {
+              reservationIsPossible = false;
+            }
+          }
+
+          if (reservationIsPossible) {
+            if (thisBooking.reservedTable == null){
+              clickedTableDOM.classList.add(classNames.booking.reserved);
+              thisBooking.reservedTable = currentClickedTable;
+            }
+
+            else if (thisBooking.reservedTable != currentClickedTable && thisBooking.reservedTable != null){
+              clickedTableDOM.classList.add(classNames.booking.reserved);
+              const incorrectReservedTableDOM = document.querySelector('[' + settings.booking.tableIdAttribute + '="' + thisBooking.reservedTable + '"]');
+              incorrectReservedTableDOM.classList.remove(classNames.booking.reserved);
+              thisBooking.reservedTable = currentClickedTable;          
+            }
+          }
+          else {
+            upperAlertHTML.innerHTML = 'You cannot reserve this table for that many hours, because it overlaps with another reservation.';
+            setTimeout(function() {
+              upperAlertHTML.innerHTML = ''; 
+            }, 5000);
+          }
         }
       }
     });
-  
   }
 
   sendBooking(){

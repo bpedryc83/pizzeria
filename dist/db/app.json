@@ -975,6 +975,19 @@
       "phone": "3457",
       "email": "2@wp.pl",
       "id": 61
+    },
+    {
+      "date": "2023-11-05",
+      "hour": "14:30",
+      "table": 3,
+      "duration": 1,
+      "ppl": 1,
+      "starters": [
+        "water"
+      ],
+      "phone": "43276",
+      "email": "2@wp.pl",
+      "id": 62
     }
   ]
 }
