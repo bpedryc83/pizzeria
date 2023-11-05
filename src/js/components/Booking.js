@@ -282,16 +282,22 @@ class Booking{
       });
   }
 
-  updateDOM(){
+  updateDOM(event){
     const thisBooking = this;
+    const elementDatePicker = document.querySelector(select.widgets.amount.datePicker.wrapper);
+    const elementHourPicker = document.querySelector(select.widgets.amount.hourPicker.wrapper);
 
-    thisBooking.reservedTable = null;
-    for (let table of thisBooking.dom.tables){
-      if (table.classList.contains(classNames.booking.reserved)){
-        table.classList.remove(classNames.booking.reserved);
+    if (event) {
+      if (event.target.contains(elementDatePicker) || event.target.contains(elementHourPicker)) {
+        thisBooking.reservedTable = null;
+        for (let table of thisBooking.dom.tables){
+          if (table.classList.contains(classNames.booking.reserved)){
+            table.classList.remove(classNames.booking.reserved);
+          }
+        }
       }
     }
-    
+
     thisBooking.date = thisBooking.datePickerWidget.value;
     thisBooking.hour = utils.hourToNumber(thisBooking.hourPickerWidget.value);
 
@@ -364,8 +370,8 @@ class Booking{
     thisBooking.datePickerWidget = new DatePicker(thisBooking.dom.datePicker);
     thisBooking.hourPickerWidget = new HourPicker(thisBooking.dom.hourPicker);
 
-    thisBooking.dom.wrapper.addEventListener('updated', function(){
-      thisBooking.updateDOM();
+    thisBooking.dom.wrapper.addEventListener('updated', function(event){
+      thisBooking.updateDOM(event);
     });
   }
 }

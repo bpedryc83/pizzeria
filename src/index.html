@@ -358,7 +358,9 @@
 
   <script id="template-booking-widget" type="text/x-handlebars-template">
     <div class="booking-widget">
-      <h2 class="page__title no-spacing">Book a table</h2>
+      <h2 class="page__title no-spacing small-margin-bottom">Book a table</h2>
+      <div class="opening-hours">(Opening hours: 12:00 - 24:00)</div>
+      <div class="upper-alert"></div>
       <form class="booking-form">
         <div class="time-picker">
           <div class="date-picker">
@@ -368,7 +370,7 @@
           <div class="hour-picker range-slider">
             <div class="output"></div>
             <label class="booking-option-title">Pick a time</label>
-            <input id="input-time" type="range" name="hour" value="12" min="12" max="24" step="0.5">
+            <input id="input-time" type="range" name="hour" value="12" min="12" max="23" step="0.5">
           </div>
         </div>
         <div class="floor-plan">

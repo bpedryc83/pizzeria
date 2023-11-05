@@ -59,6 +59,7 @@ export const select = {
     inputEMail: '.booking__order-confirmation [name="email"]',
     inputPhone: '.booking__order-confirmation [name="phone"]',
     starters: '.checkbox [name="starter"]',
+    upperAlert: '.upper-alert',
     falseValidation: '.false-validation',
     bookingSummary: '#booking-summary',
     bookingDetails: '#booking-details',
@@ -118,7 +119,7 @@ export const settings = {
   amountWidget: {
     defaultValue: 1,
     defaultMin: 1,
-    defaultMax: 10,
+    defaultMax: 9,
   },
   hours: {
     open: 12,

@@ -7,6 +7,7 @@ class AmountWidget extends BaseWidget{
     const thisWidget = this;
     thisWidget.currentValue = currentValue;
     thisWidget.initialValue = true;
+    thisWidget.element = element;
     
     thisWidget.getElements(element);
     thisWidget.renderValue();
@@ -21,9 +22,34 @@ class AmountWidget extends BaseWidget{
   }
 
   isValid(value){
-    return !isNaN(value)
+    const thisWidget = this;
+
+
+    if (thisWidget.element.classList.contains('people-amount')) {
+      return !isNaN(value)
       && value >= settings.amountWidget.defaultMin
       && value <= settings.amountWidget.defaultMax;
+    }
+    else if (thisWidget.element.classList.contains('hours-amount')) {
+      const inputOfTime = document.querySelector(select.booking.time);
+      const reservationTime = parseFloat(inputOfTime.value);
+      let newInputValue = value;
+
+      if (!isNaN(value) && value >= settings.amountWidget.defaultMin && value <= settings.amountWidget.defaultMax) { 
+        if (value + reservationTime <= settings.hours.close - 1) {
+          return true;
+        }
+        else {
+          newInputValue = settings.hours.close - Math.ceil(reservationTime);
+          return {
+            newInputValue: newInputValue,
+          };
+        }
+      }
+      else {
+        return false;
+      }
+    }
   }
 
   renderValue(){

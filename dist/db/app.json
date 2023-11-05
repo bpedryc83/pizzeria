@@ -203,62 +203,13 @@
     }
   ],
   "orders": {
-    "address": "fdshgkafh",
-    "phone": "321465",
-    "totalPrice": 43,
-    "subtotalPrice": 38,
-    "totalNumber": 3,
+    "address": "fhdslhf",
+    "phone": "345",
+    "totalPrice": 14,
+    "subtotalPrice": 9,
+    "totalNumber": 1,
     "deliveryFee": 5,
     "products": [
-      {
-        "id": "pizza",
-        "name": "Nonna Alba's Pizza",
-        "amount": 1,
-        "priceSingle": 20,
-        "price": 20,
-        "params": {
-          "sauce": {
-            "label": "Sauce",
-            "options": {
-              "tomato": "Tomato"
-            }
-          },
-          "toppings": {
-            "label": "Toppings",
-            "options": {
-              "olives": "Olives",
-              "redPeppers": "Red peppers",
-              "greenPeppers": "Green peppers",
-              "mushrooms": "Mushrooms",
-              "basil": "Fresh basil"
-            }
-          },
-          "crust": {
-            "label": "pizza crust",
-            "options": {
-              "standard": "standard"
-            }
-          }
-        }
-      },
-      {
-        "id": "salad",
-        "name": "Nonno Alberto's Salad",
-        "amount": 1,
-        "priceSingle": 9,
-        "price": 9,
-        "params": {
-          "ingredients": {
-            "label": "Ingredients",
-            "options": {
-              "cucumber": "Cucumber",
-              "tomatoes": "Tomatoes",
-              "olives": "Olives",
-              "herbs": "Fresh herbs"
-            }
-          }
-        }
-      },
       {
         "id": "cake",
         "name": "Zio Stefano's Doughnut",
@@ -991,6 +942,39 @@
       "phone": "43273268",
       "email": "2@wp.pl",
       "id": 58
+    },
+    {
+      "date": "2023-11-09",
+      "hour": "16:00",
+      "table": 1,
+      "duration": 1,
+      "ppl": 3,
+      "starters": [],
+      "phone": "54354",
+      "email": "2@wp.pl",
+      "id": 59
+    },
+    {
+      "date": "2023-11-04",
+      "hour": "15:30",
+      "table": 3,
+      "duration": 2,
+      "ppl": 1,
+      "starters": [],
+      "phone": "5325432",
+      "email": "2@wp.pl",
+      "id": 60
+    },
+    {
+      "date": "2023-11-09",
+      "hour": "18:30",
+      "table": 1,
+      "duration": 1,
+      "ppl": 1,
+      "starters": [],
+      "phone": "3457",
+      "email": "2@wp.pl",
+      "id": 61
     }
   ]
 }

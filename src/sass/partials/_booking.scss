@@ -14,6 +14,18 @@
   &.loading {
     opacity: 0.25;
   }
+
+  .small-margin-bottom {
+    margin-bottom: 0;
+  }
+}
+
+.opening-hours {
+  font-size: 12px;
+  color: lighten($color-dark, $amount: 30);
+  text-align: center;
+  margin: auto auto;
+  margin-bottom: 30px;
 }
 
 .booking-wrapper {
@@ -220,6 +232,14 @@
 
 .justify-center {
   text-align: center;
+}
+
+.upper-alert {
+  margin-top: 25px;
+  color: black;
+  background-color: yellow;
+  text-align: center;
+  margin-bottom: 30px;
 }
 
 .false-validation {

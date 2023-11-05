@@ -1,38 +1,34 @@
-//import {settings, select} from '../settings.js';
-
 class BaseWidget{
   constructor(wrapperElement, initialValue){
     const thisWidget = this;
 
     thisWidget.dom = {};
     thisWidget.dom.wrapper = wrapperElement;
-
     thisWidget.correctValue = initialValue;
   }
 
   get value(){
     const thisWidget = this;
-
     return thisWidget.correctValue;
   }
 
   set value(value){
     const thisWidget = this;
-    
     const newValue = thisWidget.parseValue(value);
-    //console.log('newValue: ' + newValue);
+    const returnedIsValid = thisWidget.isValid(newValue);
 
-    if(thisWidget.correctValue != newValue && thisWidget.isValid(newValue)){
+    if(typeof(returnedIsValid) === 'boolean'&& thisWidget.correctValue != newValue && thisWidget.isValid(newValue)){
       thisWidget.correctValue = newValue;
-      thisWidget.announce();
     }
-
+    else if (typeof(returnedIsValid) === 'object' && thisWidget.correctValue != newValue){
+      thisWidget.correctValue = returnedIsValid.newInputValue;
+    }
+    thisWidget.announce();
     thisWidget.renderValue();
   }
 
   setValue(value){
     const thisWidget = this;
-
     thisWidget.value = value;
   }
 
@@ -46,14 +42,11 @@ class BaseWidget{
 
   renderValue(){
     const thisWidget = this;
-
     thisWidget.dom.wrapper.innerHTML = thisWidget.value;
-    console.log(thisWidget.dom.input.value);
   }
 
   announce(){
     const thisWidget = this;
-
     const event = new CustomEvent('updated', {bubbles: true});
     thisWidget.dom.wrapper.dispatchEvent(event);
   }
