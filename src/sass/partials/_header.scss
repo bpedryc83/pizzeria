@@ -58,3 +58,30 @@
   }
 
 }
+
+.text-small-devices {
+  display: none;
+}
+
+@media (max-width: 632px){
+  .main-nav {
+    display: none;
+  }
+
+  .cart {
+    display: none;
+  }
+
+  .pages {
+    display: none;
+  }
+
+  .text-small-devices {
+    display: block;
+    text-align: center;
+    margin-top: 60px;
+    border: 4px solid $color-main;
+    padding: 15px 0;
+    font-size: 16px;
+  }
+}
