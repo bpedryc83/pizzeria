@@ -13,12 +13,19 @@ class AmountWidget extends BaseWidget{
     thisWidget.renderValue();
     thisWidget.initActions();
   }
+
+  initializeWithData(bookedData) {
+    const thisWidget = this;
+    thisWidget.bookedData = bookedData;
+  }
+
   getElements(){
     const thisWidget = this;
   
     thisWidget.dom.input = thisWidget.dom.wrapper.querySelector(select.widgets.amount.input);
     thisWidget.dom.linkDecrease = thisWidget.dom.wrapper.querySelector(select.widgets.amount.linkDecrease);
     thisWidget.dom.linkIncrease = thisWidget.dom.wrapper.querySelector(select.widgets.amount.linkIncrease);
+    thisWidget.dom.upperAlert = document.querySelector(select.booking.upperAlert);
   }
 
   isValid(value){
@@ -33,9 +40,41 @@ class AmountWidget extends BaseWidget{
     else if (thisWidget.element.classList.contains('hours-amount')) {
       const inputOfTime = document.querySelector(select.booking.time);
       const reservationTime = parseFloat(inputOfTime.value);
+      const reservationDate = document.querySelector(select.booking.date).value;
+      const durationOfReservation = parseInt(parseInt(document.querySelector(select.booking.inputDuration).value));
       let newInputValue = value;
 
-      if (!isNaN(value) && value >= settings.amountWidget.defaultMin && value <= settings.amountWidget.defaultMax) { 
+      thisWidget.dom.upperAlert.innerHTML = '';
+
+      const tables = document.querySelectorAll(select.booking.tables);
+      let reservedTable;
+      let reservationCollision = false;
+
+      for (let i = 0 ; i < tables.length ; i++) {
+        if (tables[i].classList.contains('reserved')) {
+          reservedTable = parseInt(tables[i].getAttribute(settings.booking.tableIdAttribute));
+        }
+      }
+
+      if (reservedTable) {
+        for (let hour = reservationTime + 0.5 ; hour <= reservationTime + durationOfReservation ; hour += 0.5) {
+          if (!thisWidget.bookedData[reservationDate][hour]) {
+            continue;
+          }
+          if (thisWidget.bookedData[reservationDate][hour].includes(reservedTable)){
+            reservationCollision = true;
+            thisWidget.dom.upperAlert.classList.add('show-content');
+            thisWidget.dom.upperAlert.innerHTML = 'You cannot reserve this table for that many hours, because it overlaps with another reservation.';
+            setTimeout(function() {
+              thisWidget.dom.upperAlert.innerHTML = '';
+              thisWidget.dom.upperAlert.classList.remove('show-content');
+            }, 5000);
+            break;
+          }
+        }
+      }
+
+      if (!isNaN(value) && value >= settings.amountWidget.defaultMin && value <= settings.amountWidget.defaultMax && !reservationCollision) { 
         if (value + reservationTime <= settings.hours.close - 1) {
           return true;
         }
@@ -62,7 +101,6 @@ class AmountWidget extends BaseWidget{
     else {
       thisWidget.dom.input.value = thisWidget.value;
     }
-
   }
 
   initActions(){

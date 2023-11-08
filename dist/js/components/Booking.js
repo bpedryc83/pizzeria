@@ -38,15 +38,11 @@ class Booking{
       ],
     };
 
-    //console.log('getData params', params);
-
     const urls = {
       booking: settings.db.url + '/' + settings.db.booking + '?' + params.booking.join('&'),
       eventsCurrent: settings.db.url + '/' + settings.db.event + '?' + params.eventsCurrent.join('&'),
       eventsRepeat: settings.db.url + '/' + settings.db.event + '?' + params.eventsRepeat.join('&'),
     };
-
-    //console.log('getData urls: ', urls.booking);
 
     Promise.all([
       fetch(urls.booking),
@@ -64,9 +60,7 @@ class Booking{
         ]);
       })
       .then(function([bookings, eventsCurrent, eventsRepeat]){
-        // console.log(bookings);
-        // console.log(eventsCurrent);
-        // console.log(eventsRepeat);
+
         thisBooking.parseData(bookings, eventsCurrent, eventsRepeat);
       });
   }
@@ -94,8 +88,9 @@ class Booking{
         }
       }
     }
-    console.log(thisBooking.booked);
     thisBooking.updateDOM();
+
+    thisBooking.hoursAmountWidget.initializeWithData(thisBooking.booked);
   }
 
   makeBooked(date, hour, duration, table){
@@ -155,6 +150,10 @@ class Booking{
         setTimeout(function() {
           falseValidationHTML.innerHTML = ''; 
         }, 5000);
+      }
+      else {
+        falseValidationHTML.innerHTML = '';
+        validation = true;
       }
 
       if (validation) {
@@ -230,14 +229,7 @@ class Booking{
           const reservationDate = thisBooking.date;
           const reservationTime = thisBooking.hour;
           const durationOfReservation = parseInt(thisBooking.dom.inputDuration.value);
-          const upperAlertHTML = document.querySelector(select.booking.upperAlert);
-          upperAlertHTML.innerHTML = '';
-          
-          // console.log ('reservationDate: ' + typeof(reservationDate) + ' ' + reservationDate);
-          // console.log('reservation: ' + typeof(reservationTime) + ' ' + reservationTime);
-          // console.log('duration :' + ' ' + typeof(durationOfReservation) + ' ' + durationOfReservation);
-
-          //console.log('bookedData: ', thisBooking.booked['2023-11-05'][12].includes(3));
+          thisBooking.dom.upperAlert.innerHTML = '';
 
           for (let i = reservationTime ; i < reservationTime + durationOfReservation ; i += 0.5) {
             if (thisBooking.booked[reservationDate][i] && thisBooking.booked[reservationDate][i].includes(parseInt(currentClickedTable))) {
@@ -259,10 +251,12 @@ class Booking{
             }
           }
           else {
-            upperAlertHTML.innerHTML = 'You cannot reserve this table for that many hours, because it overlaps with another reservation.';
+            thisBooking.dom.upperAlert.classList.add('show-content');
+            thisBooking.dom.upperAlert.innerHTML = 'You cannot reserve this table for that many hours, because it overlaps with another reservation.';
             setTimeout(function() {
-              upperAlertHTML.innerHTML = ''; 
-            }, 5000);
+              thisBooking.dom.upperAlert.innerHTML = '';
+              thisBooking.dom.upperAlert.classList.remove('show-content');
+            }, 6000);
           }
         }
       }
@@ -271,8 +265,6 @@ class Booking{
 
   sendBooking(){
     const thisBooking = this;
-
-    console.log('Przed const payLoad oraz wywołaniem makeBooked: ', JSON.parse(JSON.stringify(thisBooking.booked)));
 
     const payload = {
       date: thisBooking.date,
@@ -292,8 +284,6 @@ class Booking{
     }
 
     thisBooking.makeBooked(payload.date, payload.hour, payload.duration, payload.table);
-    
-    console.log('Po const payLoad oraz wywołaniu makeBooked: ', thisBooking.booked);
 
     const justReservedTableDOM = document.querySelector(select.booking.tables + '[' + settings.booking.tableIdAttribute + '="' + thisBooking.reservedTable + '"]');
     justReservedTableDOM.classList.add(classNames.booking.tableBooked);
@@ -393,6 +383,7 @@ class Booking{
     thisBooking.dom.inputEMail = document.querySelector(select.booking.inputEMail);
     thisBooking.dom.starters = document.querySelectorAll(select.booking.starters);
 
+    thisBooking.dom.upperAlert = document.querySelector(select.booking.upperAlert);
     thisBooking.dom.falseValidation = document.querySelector(select.booking.falseValidation);
   }
 

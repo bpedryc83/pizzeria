@@ -236,10 +236,25 @@
 
 .upper-alert {
   margin-top: 25px;
-  color: black;
-  background-color: yellow;
+  color: $color-light;
+  background-color: $color-main;
   text-align: center;
   margin-bottom: 30px;
+}
+
+.show-content {
+  opacity: 1;
+  animation: scaleUp 0.3s ease-in-out forwards;
+  border: 1px solid black;
+}
+
+@keyframes scaleUp {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
 }
 
 .false-validation {

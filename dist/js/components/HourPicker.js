@@ -27,10 +27,16 @@ class HourPicker extends BaseWidget{
        
       if (clickedIncrease && utils.hourToNumber(thisWidget.value) + duration > settings.hours.close - 1) {
         inputDuration.value = settings.hours.close - Math.ceil(parseFloat(utils.hourToNumber(thisWidget.value)));
+        upperAlertHTML.classList.add('show-content');
         upperAlertHTML.innerHTML = 'The end time of the reservation cannot be later than the restaurant\'s closing time.<br> The reservation duration has been updated.';
+        setTimeout(function() {
+          upperAlertHTML.innerHTML = '';
+          upperAlertHTML.classList.remove('show-content');
+        }, 5000);
       }
       else {
         upperAlertHTML.innerHTML = '';
+        upperAlertHTML.classList.remove('show-content');
       }
     });
   }
