@@ -252,6 +252,7 @@
   from {
     transform: scale(0);
   }
+  
   to {
     transform: scale(1);
   }
@@ -270,9 +271,11 @@
 
 .table-legend {
   text-align: center;
+  
   span {
     display: inline-block;
   }
+
   span:last-child {
     margin-left: 3px;
     margin-right: 8px;
@@ -299,10 +302,6 @@
 
 .not-visible {
   display: none;
-}
-
-.booking-summary {
-  text-align: center;
 }
 
 .booking-details {

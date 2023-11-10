@@ -150,13 +150,7 @@ class Cart{
       body: JSON.stringify(payload),
     };
     
-    fetch(url, options)
-      .then(function(response){
-        return response.json();
-      })
-      .then(function(parsedResponse){
-        console.log('parsedResponse', parsedResponse);
-      });
+    fetch(url, options);
     
     const deliveryObject = {name: 'Delivery', amount: 1, priceSingle: thisCart.deliveryFee, price: thisCart.deliveryFee};
     payload.products.push(deliveryObject);
