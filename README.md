@@ -2,7 +2,7 @@
 
 The Mamma Mia Restaurant/Pizzeria website not only presents its offerings but also allows clients to place orders and reserve tables online.
 
-## [Demo (click)](https://project-pizzeriabp--bpedryc83.repl.co/)
+## [Demo (click)](https://pizzeria--bpedryc83.repl.co/)
 
 ## Technologies
 
@@ -24,21 +24,22 @@ The initial design was provided and later developed by the author, Bartłomiej P
   * The cart, although is not a part of the order subpage, is closely connected with its functionality. The display of its contents is also enhanced through Handlebars technology.
   &nbsp;
 * Booking
-  * Using a few widgets, the client can book an indicated table in the restaurant. What is important, this process is only possible when all other reservations are not in collision with this new one.    
+  * Using a few widgets, the client can book an indicated table in the restaurant. What is important, this process is only possible when all other reservations are not in collision with the new one.    
 
 
 ## Screenshots
 
 ## Home page
-  <img src="src/images/draw_routes.jpg" width="290" />
+  <img src="src/images/mainpage.jpg" width="290" />
   
 ## Order  
+  <img src="src/images/pizza.jpg" width="290" />
   
- 
 ## Cart
+  <img src="src/images/cart.jpg" width="290" />
   
-
 ## Booking page  
+  <img src="src/images/booking.jpg" width="290" />
   
-
 ## Booking confirmation  
+  <img src="src/images/confirmation.jpg" width="290" />
