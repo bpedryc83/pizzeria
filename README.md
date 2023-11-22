@@ -2,7 +2,7 @@
 
 The Mamma Mia Restaurant/Pizzeria website not only presents its offerings but also allows clients to place orders and reserve tables online.
 
-## [Demo (click)](https://pizzeria--bpedryc83.repl.co/)
+## [Demo (click)](https://pizzeria-bpedryc83.replit.app/)
 
 ## Technologies
 
